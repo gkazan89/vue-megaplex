@@ -1,10 +1,12 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import Vue2Filters from "vue2-filters";
+import axios from "axios";
 
 Vue.config.productionTip = false;
 
-Vue.use(require("moment"));
+Vue.use(Vue2Filters);
 
 new Vue({
   router,
