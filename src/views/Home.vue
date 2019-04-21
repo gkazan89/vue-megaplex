@@ -7,11 +7,14 @@
       <p>Time: {{ showtime.time }}</p>
       <p>
         Soldout?
-        {{
-          showtime.status.is_sold_out
-            | moment("timezone", "America/Los_Angeles", "LLLL ss")
-        }}
+        {{ showtime.status.is_sold_out }}
       </p>
+      <div v-if="showtime.status.is_sold_out == false">
+        <button v-on:click="buyTicket(showtime)">BUY!</button>
+      </div>
+      <div v-else class="sold_out">
+        <p>SOLD OUT</p>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +23,10 @@
 .showtime {
   border: solid gray;
   margin-bottom: 1.5rem;
+}
+
+.sold_out {
+  color: red;
 }
 </style>
 
@@ -41,7 +48,11 @@ export default {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    buyTicket: function(showtime) {
+      console.log(showtime);
+    }
+  },
   computed: {}
 };
 </script>
