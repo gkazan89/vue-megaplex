@@ -1,64 +1,112 @@
 <template>
-  <div class="home">
-    <h1>Owner Portal</h1>
-    <ul class="error">
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>
-    <h2>Tickets</h2>
-    <p>Filter By Movie: <input type="text" v-model="searchFilter" /></p>
-    <div
-      v-for="ticket in filterBy(tickets, searchFilter, 'movie')"
-      class="ticket"
-    >
-      <p>Name: {{ ticket.name }}</p>
-      <p>Email: {{ ticket.email }}</p>
-      <p>Movie: {{ ticket.movie }}</p>
-      <p>Showtime: {{ ticket.showtime }}</p>
-      <p>Theater: {{ ticket.theater }}</p>
-    </div>
-    <h3>Movies</h3>
-    <div v-for="movie in movies" class="ticket">
-      <p>Movie: {{ movie.title }}</p>
-      <p>Runtime: {{ movie.runtime }}</p>
-      <p>ID: {{ movie.id }}</p>
-    </div>
-    <div class="ticket">
-      <p>Add Movie</p>
-      <p>Movie: <input type="text" v-model="title" /></p>
-      <p>Runtime (in minutes): <input type="number" v-model="runtime" /></p>
-      <button v-on:click="addMovie()">Add Movie</button>
-    </div>
+  <div class="home col">
+    <div>
+      <h1>Owner Portal</h1>
+      <ul class="error">
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
 
-    <h3>Theaters</h3>
-    <div v-for="theater in theaters" class="ticket">
-      <p>Theater ID: {{ theater.theater_id }}</p>
-      <p>Capacity: {{ theater.capacity }}</p>
-    </div>
+      <!-- tickets -->
+      <h2>Tickets</h2>
+      <p class="above">
+        Filter By Movie: <input type="text" v-model="searchFilter" />
+      </p>
+      <div class="row">
+        <div
+          v-for="ticket in filterBy(tickets, searchFilter, 'movie')"
+          class="col-md-4"
+        >
+          <div class="card">
+            <p>Name: {{ ticket.name }}</p>
+            <p>Email: {{ ticket.email }}</p>
+            <p>Movie: {{ ticket.movie }}</p>
+            <p>Showtime: {{ ticket.showtime }}</p>
+            <p>Theater: {{ ticket.theater }}</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="ticket">
-      <p>Add Theater</p>
-      <p>Seating Capacity: <input type="number" v-model="capacity" /></p>
-      <button v-on:click="addTheat()">Add Theater</button>
-    </div>
+      <!-- movies -->
+      <h3>Movies</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <p>Add Movie</p>
+            <p>Movie: <input type="text" v-model="title" /></p>
+            <p>
+              Runtime (in minutes): <input type="number" v-model="runtime" />
+            </p>
+            <button class="btn btn-primary" v-on:click="addMovie()">
+              Add Movie
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div v-for="movie in movies" class="col-md-4">
+          <div class="card">
+            <p>Movie: {{ movie.title }}</p>
+            <p>Runtime: {{ movie.runtime }}</p>
+            <p>ID: {{ movie.id }}</p>
+          </div>
+        </div>
+      </div>
 
-    <h3>Showtimes</h3>
-    <p>Add Showtime</p>
-    <p>Movie_ID: <input type="number" v-model="movieID" /></p>
-    <p>Theater_ID: <input type="number" v-model="theaterID" /></p>
-    <p>Time: <input type="time" v-model="time" /></p>
-    <button v-on:click="addShow()">Add Showtime</button>
-    <div v-for="showtime in showtimes" class="ticket">
-      <p>Movie: {{ showtime.title }}</p>
-      <p>Theater: {{ showtime.theater_id }}</p>
-      <p>Time: {{ showtime.time }}</p>
+      <!-- theaters -->
+      <h3>Theaters</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <p>Add Theater</p>
+            <p>Seating Capacity: <input type="number" v-model="capacity" /></p>
+            <button class="btn btn-primary" v-on:click="addTheat()">
+              Add Theater
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div v-for="theater in theaters" class="col-md-4">
+          <div class="card">
+            <p>Theater ID: {{ theater.theater_id }}</p>
+            <p>Capacity: {{ theater.capacity }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- showtimes -->
+      <h3>Showtimes</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <p>Add Showtime</p>
+            <p>Movie_ID: <input type="number" v-model="movieID" /></p>
+            <p>Theater_ID: <input type="number" v-model="theaterID" /></p>
+            <p>Time: <input type="time" v-model="time" /></p>
+            <button class="btn btn-primary" v-on:click="addShow()">
+              Add Showtime
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div v-for="showtime in showtimes" class="col-md-4">
+          <div class="card">
+            <p>Movie: {{ showtime.title }}</p>
+            <p>Theater: {{ showtime.theater_id }}</p>
+            <p>Time: {{ showtime.time }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
-.ticket {
-  border: solid gray;
-  margin-bottom: 1.5rem;
+h3,
+#film {
+  margin: 0.5rem 1rem;
 }
 
 .sold_out,
