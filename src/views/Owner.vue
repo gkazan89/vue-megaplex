@@ -129,6 +129,8 @@ export default {
           this.movies.push(response.data);
         }.bind(this)
       );
+      this.title = "";
+      this.runtime = "";
     },
 
     addTheat: function() {
@@ -140,6 +142,7 @@ export default {
           this.theaters.push(response.data);
         }.bind(this)
       );
+      this.capacity = "";
     },
 
     addShow: function() {
@@ -153,6 +156,9 @@ export default {
           this.showtimes.push(response.data);
         }.bind(this)
       );
+      this.movieID = "";
+      this.theaterID = "";
+      this.time = "";
     }
   },
   props: ["showtime"],
