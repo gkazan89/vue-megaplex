@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-    <h1>Showtimes Available</h1>
+    <h1>Welcome to the Megaplex!</h1>
+    <h2>Showtimes Available</h2>
     <ul class="error">
       <li v-for="error in errors">{{ error }}</li>
     </ul>
     <div class="row">
       <div
         v-for="showtime in showtimes"
+        :key="showtime.status.is_sold_out"
         v-bind:showtime="showtime"
         class="col-md-4"
       >
@@ -78,7 +80,7 @@
                         type="button"
                         class="btn btn-primary"
                         data-dismiss="modal"
-                        v-on:click="buyTicket(showtime)"
+                        v-on:click="buyTicket(currentShowtime)"
                       >
                         Submit
                       </button>
@@ -139,14 +141,14 @@ export default {
   },
   methods: {
     // ticket create
-    buyTicket: function(showtime) {
+    buyTicket: function(currentShowtime) {
       this.errors = [];
       var params = {
         name: this.name,
         email: this.email,
         credit_card: this.credit_card,
         expiration_date: this.expiration_date,
-        showtime_id: showtime.id
+        showtime_id: currentShowtime.id
       };
       axios
         .post("http://localhost:3000/api/tickets", params)
