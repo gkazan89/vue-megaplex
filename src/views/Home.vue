@@ -30,11 +30,6 @@
           </p>
           <p>{{ showtime.id }}</p>
         </div>
-        <!--         name
-        email
-        credit_card
-        expiration_date
-        showtime_id -->
       </div>
       <div v-else class="sold_out">
         <p>SOLD OUT</p>
@@ -52,6 +47,11 @@
 .sold_out,
 .error {
   color: red;
+}
+
+button {
+  color: white;
+  background-color: black;
 }
 
 input {
