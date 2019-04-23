@@ -122,7 +122,6 @@ export default {
     return {
       message: "Welcome to My Site!",
       showtimes: [],
-      arr: [],
       name: "",
       email: "",
       credit_card: "",
