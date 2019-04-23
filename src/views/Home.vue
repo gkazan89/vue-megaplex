@@ -8,7 +8,6 @@
     <div class="row">
       <div
         v-for="showtime in showtimes"
-        :key="showtime.status.is_sold_out"
         v-bind:showtime="showtime"
         class="col-md-4"
       >
@@ -123,6 +122,7 @@ export default {
     return {
       message: "Welcome to My Site!",
       showtimes: [],
+      arr: [],
       name: "",
       email: "",
       credit_card: "",
@@ -134,7 +134,6 @@ export default {
   created: function() {
     axios.get("http://localhost:3000/api/showtimes").then(
       function(response) {
-        console.log(response);
         this.showtimes = response.data;
       }.bind(this)
     );
@@ -163,9 +162,9 @@ export default {
       this.email = "";
       this.credit_card = "";
       this.expiration_date = "";
+      this.$router.go();
     }
   },
-  props: ["showtime"],
-  computed: {}
+  props: ["showtime"]
 };
 </script>
