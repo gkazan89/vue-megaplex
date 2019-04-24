@@ -142,8 +142,6 @@ export default {
     buyTicket: function(currentShowtime) {
       var self = this;
       this.errors = [];
-      var num = 0;
-      this.num = 0;
       var params = {
         name: this.name,
         email: this.email,
