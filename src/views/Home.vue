@@ -2,9 +2,6 @@
   <div class="home">
     <h1>Welcome to the Megaplex!</h1>
     <h2>Showtimes Available</h2>
-    <ul class="error">
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>
     <div class="row">
       <div
         v-for="showtime in showtimes"
@@ -54,6 +51,10 @@
                     </div>
                     <div class="modal-body">
                       <div>
+                        <ul class="error">
+                          <li v-for="error in errors">{{ error }}</li>
+                        </ul>
+                        </p>
                         <p>name: <input type="text" v-model="name" /></p>
                         <p>email: <input type="text" v-model="email" /></p>
                         <p>
@@ -78,7 +79,6 @@
                       <button
                         type="button"
                         class="btn btn-primary"
-                        data-dismiss="modal"
                         v-on:click="buyTicket(currentShowtime)"
                       >
                         Submit
@@ -127,7 +127,7 @@ export default {
       credit_card: "",
       expiration_date: "",
       errors: [],
-      currentShowtime: {}
+      currentShowtime: {},
     };
   },
   created: function() {
@@ -140,7 +140,10 @@ export default {
   methods: {
     // ticket create
     buyTicket: function(currentShowtime) {
+      var self = this;
       this.errors = [];
+      var num = 0;
+      this.num = 0;
       var params = {
         name: this.name,
         email: this.email,
@@ -151,18 +154,18 @@ export default {
       axios
         .post("http://localhost:3000/api/tickets", params)
         .then(function(response) {
-          console.log("RESPONSE: ", response);
+          currentShowtime.name = "";
+          currentShowtime.email = "";
+          currentShowtime.credit_card = "";
+          currentShowtime.expiration_date = "";
+          self.$router.go();                  
         })
         .catch(error => {
           console.log(error.response.data.errors);
           this.errors = error.response.data.errors;
         });
-      this.name = "";
-      this.email = "";
-      this.credit_card = "";
-      this.expiration_date = "";
-      this.$router.go();
-    }
+
+    },
   },
   props: ["showtime"]
 };
