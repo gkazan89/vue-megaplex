@@ -131,7 +131,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/showtimes").then(
+    axios.get("/api/showtimes").then(
       function(response) {
         this.showtimes = response.data;
       }.bind(this)
@@ -150,7 +150,7 @@ export default {
         showtime_id: currentShowtime.id
       };
       axios
-        .post("http://localhost:3000/api/tickets", params)
+        .post("/api/tickets", params)
         .then(function(response) {
           currentShowtime.name = "";
           currentShowtime.email = "";

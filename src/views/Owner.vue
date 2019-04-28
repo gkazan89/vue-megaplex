@@ -46,7 +46,7 @@
         <div v-for="movie in movies" class="col-md-4">
           <div class="card">
             <p>Movie: {{ movie.title }}</p>
-            <p>Runtime: {{ movie.runtime }}</p>
+            <p>Runtime: {{ movie.runtime }} minutes</p>
             <p>ID: {{ movie.id }}</p>
           </div>
         </div>
@@ -143,24 +143,24 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/tickets").then(
+    axios.get("/api/tickets").then(
       function(response) {
         this.tickets = response.data;
       }.bind(this)
     );
 
-    axios.get("http://localhost:3000/api/movies").then(
+    axios.get("/api/movies").then(
       function(response) {
         this.movies = response.data;
       }.bind(this)
     );
 
-    axios.get("http://localhost:3000/api/theaters").then(
+    axios.get("/api/theaters").then(
       function(response) {
         this.theaters = response.data;
       }.bind(this)
     );
-    axios.get("http://localhost:3000/api/showtimes").then(
+    axios.get("/api/showtimes").then(
       function(response) {
         this.showtimes = response.data;
       }.bind(this)
@@ -172,7 +172,7 @@ export default {
         name: this.title,
         runtime: this.runtime
       };
-      axios.post("http://localhost:3000/api/movies", params).then(
+      axios.post("/api/movies", params).then(
         function(response) {
           this.movies.push(response.data);
         }.bind(this)
@@ -185,7 +185,7 @@ export default {
       var params = {
         capacity: this.capacity
       };
-      axios.post("http://localhost:3000/api/theaters", params).then(
+      axios.post("/api/theaters", params).then(
         function(response) {
           this.theaters.push(response.data);
         }.bind(this)
@@ -199,7 +199,7 @@ export default {
         theater_id: this.theaterID,
         time: this.time
       };
-      axios.post("http://localhost:3000/api/showtimes", params).then(
+      axios.post("/api/showtimes", params).then(
         function(response) {
           this.showtimes.push(response.data);
         }.bind(this)
